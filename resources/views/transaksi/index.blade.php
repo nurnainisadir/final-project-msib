@@ -9,6 +9,9 @@
                     <h3 class="m-0 font-weight-bold text-primary">Data Transaksi</h3><p style="float:right;">
                         <a href="{{ route('transaksi.create') }}">
                             <button type="button" class="btn btn-primary bi-plus" title="Tambah Transaksi">Tambah</button></a></h3>
+
+                        <a href="{{ url('transaksi-excel') }}">
+                            <button type="button" class="btn btn-success bi-file-earmark-excel" title="Export to Excel Transaksi">Export</button></a></h3>   
                     <br>
                 </div>
             </div>

@@ -8,6 +8,8 @@ use App\Models\Customer;
 use App\Models\Jenis;
 use App\Models\Karyawan;
 use DB;
+use App\Exports\TransaksiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
@@ -138,5 +140,10 @@ class TransaksiController extends Controller
         $row = Transaksi::where($id);
          Transaksi::where('idtransaksi',$id)->delete();
         return redirect()->route('transaksi.index');
-}
+    }
+
+    public function transaksiExcel() 
+    {
+        return Excel::download(new TransaksiExport, 'transaksi.xlsx');
+    }
 }

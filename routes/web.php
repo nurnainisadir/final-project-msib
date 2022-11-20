@@ -43,4 +43,6 @@ Route::get('transaksi-edit/{idtransaksi}', [TransaksiController::class,'edit']);
 Route::get('jenis-edit/{idjenis}', [JenisController::class,'edit']);
 Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
 Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
+Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
+Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
 Auth::routes();
