@@ -5,6 +5,7 @@ use App\Http\Controllers\JenisController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,5 @@ Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
 Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
 Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
 Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
+Route::get('dashboard', [DashboardController::class,'index']);
 Auth::routes();
