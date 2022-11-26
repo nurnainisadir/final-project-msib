@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\RoleRequest;
 
 class ACLController extends Controller
 {
@@ -82,7 +83,7 @@ class ACLController extends Controller
             }
         });
 
-        return redirect()->back()->with('status', 'Role berhasil disimpan.');
+        return redirect()->route('acl.role.index')->with('status', 'Role berhasil disimpan.');
     }
 
     /**
@@ -106,7 +107,7 @@ class ACLController extends Controller
             }
         });
 
-        return redirect()->back()->with('status', 'Role berhasil dibuat.');
+        return redirect()->route('acl.role.index')->with('status', 'Role berhasil dibuat.');
     }
 
     /**
