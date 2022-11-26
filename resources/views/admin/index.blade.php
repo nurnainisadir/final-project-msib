@@ -17,6 +17,7 @@
 
 <body id="page-top">
   <div id="wrapper">
+    @include('sweetalert::alert')
     <!-- Sidebar -->
     @include('admin.sidebar')
     <!-- Sidebar -->

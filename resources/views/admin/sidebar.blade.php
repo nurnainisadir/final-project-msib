@@ -7,7 +7,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{{url('/administrator')}}">
+        <a class="nav-link" href="{{url('/dashboard')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -43,9 +43,12 @@
 
       <hr class="sidebar-divider">
        <li class="nav-item">
-        <a class="nav-link" href="{{ asset('/home') }}">
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button class="nav-link">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>
-        </a>
+        </button>
+        </form>
       </li>
     </ul>

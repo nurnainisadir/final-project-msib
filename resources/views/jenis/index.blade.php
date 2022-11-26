@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h3 class="m-0 font-weight-bold text-primary">Data Jenis</h3><p style="float:right;">
+                    <h3 class="m-0 font-weight-bold text-primary">Data Jenis</h3><br>
                         
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -15,8 +15,10 @@
                         @endif
 
                     <a href="{{ route('jenis.create') }}">
-                   <button type="button" class="btn btn-primary bi-plus" title="Tambah Jenis">Tambah</button></a></h3>
-                    <br>
+                    <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah Jenis"></button></a>&nbsp;
+                    <a href="{{ url('jenis-pdf')}}">
+                    <button type="button" class="btn btn-danger bi-file-earmark-pdf btn-sm" title="Export PDF"></button></a>
+                    <br><br>
                 </div>
             </div>
         </div>

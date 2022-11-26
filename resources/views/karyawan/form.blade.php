@@ -62,7 +62,7 @@
         <br>
         <div class="d-grid">
             <button class="btn btn-primary" type="submit">Submit</button>
-             <button type="reset" class="btn btn-secondary">Batal</button>
+             <button type="submit" class="btn btn-secondary">Batal</button>
         </div>
     </form>
 </div>
