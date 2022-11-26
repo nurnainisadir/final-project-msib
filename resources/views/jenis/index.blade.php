@@ -22,11 +22,12 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
-                <table class="table table-borderless table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
-                        <tr>
+                        <tr  align="center">
                             <th scope="col">No</th>
                             <th scope="col">Jenis Laundry</th>
                             <th scope="col">Harga</th>
@@ -34,30 +35,58 @@
                         </tr>
                     </thead>
                     <tbody>
-                         @php $no = 1; @endphp
+                        @php $no = 1; @endphp
                         @foreach($jenis as $row)
                         <tr>
                             <th scope="row">{{$no++}}</th>
-                        <td>{{ $row->jenis_laundry }}</td>
-                        <td>Rp. {{number_format($row['harga'], 2,',','.')}}</td>
-                        <td>
-                             <form method="POST" action="{{ route('jenis.destroy',$row->idjenis) }}">
-                                @csrf
-                                @method('DELETE')
-                        <a class="btn btn-warning btn-sm" title="Edit"href=" {{ url('jenis-edit',$row->idjenis) }}"><i class="bi bi-pencil-square"></i></a>
-
-                         <button type="submit" class="btn btn-danger btn-sm" title="Hapus Transaksi"
-                                    onclick="return confirm('Yakin ingin menghapus data ?')">
+                            <td>{{ $row->jenis_laundry }}</td>
+                            <td>Rp. {{number_format($row['harga'], 2,',','.')}}</td>
+                            <td>
+                            <form method="POST" id="formDelete">
+                            @csrf
+                            @method('DELETE')
+                                <a class="btn btn-warning btn-sm" title="Edit"
+                                    href=" {{ route('jenis.edit',$row->idjenis) }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                &nbsp;
+                                <button type="submit" 
+                                data-action="{{ route('jenis.destroy',$row->idjenis) }}"
+                                class="btn btn-danger btn-sm btnDelete" title="Hapus">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
-                        </td>
+                            </td>
                         </tr>
-                      @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $('body').on('click', '.btnDelete', function(e) {
+    e.preventDefault();
+    var action = $(this).data('action');
+    Swal.fire({
+        title: 'Yakin ingin menghapus data ini?',
+        text: "Data yang sudah dihapus tidak bisa dikembalikan lagi",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Yakin'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('#formDelete').attr('action', action);
+            $('#formDelete').submit();
+        }
+    })
+})
+</script>
 @endsection

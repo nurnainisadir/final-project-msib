@@ -26,9 +26,9 @@
         </div>
         <div class="row">
             <div class="col-12">
-                    <table class="table table-borderless table-striped">
+                    <table class="table table-striped table-bordered">
                     <thead>
-                        <tr>
+                        <tr  align="center">
                             <th scope="col">No</th>
                             <th scope="col">Kode</th>
                             <th scope="col">Nama Karyawan</th>
@@ -57,16 +57,24 @@
                                 @endempty
                             </td>
                             <td>
-                            <form method="POST" action="{{ route('karyawan.destroy',$row->idkaryawan) }}">
-                                @csrf
-                                @method('DELETE')
-                                <a class="btn btn-info btn-sm" title="Detail" href=" {{ route('karyawan.show',$row->idkaryawan) }}"> <i class="bi bi-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" title="Edit"href=" {{ url('karyawan-edit',$row->idkaryawan) }}"><i class="bi bi-pencil-square"></i></a>
-
-                            <button type="submit" class="btn btn-danger btn-sm" title="Hapus"
-                                onclick="return confirm('Yakin ingin menghapus data ?')">
-                                <i class="bi bi-trash"></i>
-                            </button>
+                            <form method="POST" id="formDelete">
+                            @csrf
+                            @method('DELETE')
+                                <a class="btn btn-info btn-sm" title="Detail"
+                                    href=" {{ route('karyawan.show',$row->idkaryawan) }}">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                &nbsp;
+                                <a class="btn btn-warning btn-sm" title="Edit"
+                                    href=" {{ route('karyawan.edit',$row->idkaryawan) }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                &nbsp;
+                                <button type="submit" 
+                                data-action="{{ route('karyawan.destroy',$row->idkaryawan) }}"
+                                class="btn btn-danger btn-sm btnDelete" title="Hapus">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </form>
                             </td>
                         </tr>
@@ -77,4 +85,28 @@
         </div>
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $('body').on('click', '.btnDelete', function(e) {
+    e.preventDefault();
+    var action = $(this).data('action');
+    Swal.fire({
+        title: 'Yakin ingin menghapus data ini?',
+        text: "Data yang sudah dihapus tidak bisa dikembalikan lagi",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Batal',
+        confirmButtonText: 'Yakin'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $('#formDelete').attr('action', action);
+            $('#formDelete').submit();
+        }
+    })
+})
+</script>
 @endsection
