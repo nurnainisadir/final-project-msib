@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ACLController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,18 @@ Route::middleware('auth')->group(function(){
         return view('admin.home');
     });
     Route::resource('users',UserController::class);
+    Route::prefix('acl')->name('acl.')->group(function () {
+        Route::get('permission', [ACLController::class, 'permissionList'])->name('permission.index');
+        // Route::prefix('role')->name('role.')->group(function () {
+        //     Route::get('/', [General\ACLController::class, 'roleList'])->name('index');
+        //     Route::get('/data', [General\ACLController::class, 'roleData'])->name('data');
+        //     Route::get('/create', [General\ACLController::class, 'createRole'])->name('create');
+        //     Route::post('/create', [General\ACLController::class, 'storeRole'])->name('store');
+        //     Route::get('/{id}/edit', [General\ACLController::class, 'editRole'])->name('edit');
+        //     Route::patch('/{id}/edit', [General\ACLController::class, 'updateRole'])->name('update');
+        //     Route::delete('/{id}/destroy', [General\ACLController::class, 'deleteRole'])->name('destroy');
+        // });
+    });
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);

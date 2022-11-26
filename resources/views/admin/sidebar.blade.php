@@ -24,6 +24,7 @@
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('/users')}}">Data User</a>
+            <a class="collapse-item" href="{{url('/acl/permission')}}">Data Permission</a>
           </div>
         </div>
       </li>
