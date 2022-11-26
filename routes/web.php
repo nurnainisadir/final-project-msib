@@ -21,6 +21,7 @@ use App\Http\Controllers\DashboardController;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
+Auth::routes();
 Route::get('/', function () {
     return view('landingpage.home');
 });
@@ -33,18 +34,26 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('landingpage.contact');
 });
-Route::get('/administrator', function () {
-    return view('admin.home');
+Route::middleware('auth')->group(function(){
+    Route::get('/administrator', function () {
+        return view('admin.home');
+    });
+    
+    Route::resource('jenis',JenisController::class);
+    Route::resource('customer',CustomerController::class);
+    Route::resource('karyawan',KaryawanController::class);
+    Route::resource('transaksi',TransaksiController::class);
+    Route::get('transaksi-edit/{idtransaksi}', [TransaksiController::class,'edit']);
+    Route::get('jenis-edit/{idjenis}', [JenisController::class,'edit']);
+    Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
+    Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
+    //Route::delete('customer/{id}', [CustomerController::class, 'delete']);
+    Route::get('customer-pdf', [CustomerController::class,'customerPDF']);
+    Route::get('karyawan-pdf', [KaryawanController::class,'karyawanPDF']);
+    Route::get('jenis-pdf', [JenisController::class,'jenisPDF']);
+    Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
+    Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
+    Route::get('dashboard', [DashboardController::class,'index']);
 });
-Route::resource('jenis',JenisController::class);
-Route::resource('customer',CustomerController::class);
-Route::resource('karyawan',KaryawanController::class);
-Route::resource('transaksi',TransaksiController::class);
-Route::get('transaksi-edit/{idtransaksi}', [TransaksiController::class,'edit']);
-Route::get('jenis-edit/{idjenis}', [JenisController::class,'edit']);
-Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
-Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
-Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
-Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
-Route::get('dashboard', [DashboardController::class,'index']);
-Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

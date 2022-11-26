@@ -43,9 +43,12 @@
 
       <hr class="sidebar-divider">
        <li class="nav-item">
-        <a class="nav-link" href="{{ asset('/home') }}">
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button class="nav-link">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>
-        </a>
+        </button>
+        </form>
       </li>
     </ul>

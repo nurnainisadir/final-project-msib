@@ -8,6 +8,8 @@ use App\Models\Customer;
 use App\Models\Jenis;
 use App\Models\Karyawan;
 use DB;
+use PDF;
+use Alert;
 use App\Exports\TransaksiExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -69,7 +71,8 @@ class TransaksiController extends Controller
                 'created_at'=>now(),
             ]);
        
-        return redirect()->route('transaksi.index');
+        return redirect()->route('transaksi.index')
+                        ->with('success','Data Transaksi Berhasil Disimpan');
     }
 
     /**
@@ -126,7 +129,8 @@ class TransaksiController extends Controller
                 'created_at'=>now(),
             ]); 
        
-        return redirect()->route('transaksi.index');
+        return redirect()->route('transaksi.index')
+                        ->with('success','Data Transaksi Berhasil Diubah');
     }
 
     /**
@@ -138,8 +142,18 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         $row = Transaksi::where($id);
-         Transaksi::where('idtransaksi',$id)->delete();
-        return redirect()->route('transaksi.index');
+        Transaksi::where('idtransaksi',$id)->delete();
+        return redirect()->route('transaksi.index')
+                        ->with('success','Data Transaksi Berhasil Dihapus');
+    }
+
+   
+
+    public function transaksiPDF()
+    {
+        $transaksi = Transaksi::all();
+        $pdf = PDF::loadView('transaksi.transaksiPDF', ['transaksi'=>$transaksi]);
+        return $pdf->download('transaksi.pdf');
     }
 
     public function transaksiExcel() 

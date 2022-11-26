@@ -13,6 +13,6 @@ class DashboardController extends Controller
                 ->selectRaw('gender, count(gender) as jumlah')
                 ->groupBy('gender')
                 ->get();
-        return view('dashboard.index', compact('ar_gender'));
+        return view('dashboard.index', compact('ar_harga', 'ar_gender'));
     }
 }

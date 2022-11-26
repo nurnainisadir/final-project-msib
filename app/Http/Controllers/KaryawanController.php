@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
 use DB;
+use PDF;
+use Alert;
 
 class KaryawanController extends Controller
 {
@@ -68,7 +70,8 @@ class KaryawanController extends Controller
                 'created_at'=>now(),
             ]);
        
-        return redirect()->route('karyawan.index');
+        return redirect()->route('karyawan.index')
+                        ->with('success','Data Karyawan Baru Berhasil Disimpan');
     }
 
     /**
@@ -134,7 +137,8 @@ class KaryawanController extends Controller
                 'foto'=>$fileName,
                 'updated_at'=>now(),
             ]);
-        return redirect()->route('karyawan.index');
+        return redirect()->route('karyawan.index')
+                        ->with('success','Data Karyawan Berhasil Diubah');
     }
 
     /**
@@ -146,9 +150,14 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         $row = Karyawan::where($id);
-         Karyawan::where('idkaryawan',$id)->delete();
-        return redirect()->route('karyawan.index');
+        Karyawan::where('idkaryawan',$id)->delete();
+        return redirect()->route('karyawan.index')
+                        ->with('success','Data Karyawan Berhasil Dihapus');
     }
-
-    
+    public function karyawanPDF()
+    {
+        $karyawan = Karyawan::all();
+        $pdf = PDF::loadView('karyawan.karyawanPDF', ['karyawan'=>$karyawan]);
+        return $pdf->download('dataKaryawan.pdf');
+    }
 }

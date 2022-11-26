@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Jenis;
 use DB;
+use PDF;
+use Alert;
 
 class JenisController extends Controller
 {
@@ -45,7 +47,9 @@ class JenisController extends Controller
       
         Jenis::create($request->all());
        
-        return redirect()->route('jenis.index');
+        return redirect()->route('jenis.index')
+                        ->with('success','Data Jenis Berhasil Disimpan');
+                        
     }
 
     /**
@@ -92,7 +96,8 @@ class JenisController extends Controller
                 'updated_at'=>now(),
             ]);
        
-        return redirect()->route('jenis.index');
+        return redirect()->route('jenis.index')
+                        ->with('success','Data Jenis Berhasil Diubah');
     }
 
     /**
@@ -105,6 +110,13 @@ class JenisController extends Controller
     {
         $row = Jenis::where($id);
          Jenis::where('idjenis',$id)->delete();
-        return redirect()->route('jenis.index');
+        return redirect()->route('jenis.index')
+                        ->with('success','Data Jenis Berhasil Dihapus');
+    }
+    public function jenisPDF()
+    {
+        $jenis = Jenis::all();
+        $pdf = PDF::loadView('jenis.jenisPDF', ['jenis'=>$jenis]);
+        return $pdf->download('dataJenis.pdf');
     }
 }

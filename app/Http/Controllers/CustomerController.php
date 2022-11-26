@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use DB;
+use PDF;
+use Alert;
 
 class CustomerController extends Controller
 {
@@ -47,7 +49,8 @@ class CustomerController extends Controller
       
         Customer::create($request->all());
        
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')
+                        ->with('success','Data Customer Berhasil Disimpan');
     }
 
     /**
@@ -97,7 +100,8 @@ class CustomerController extends Controller
                 'alamat'=>$request->alamat,
                 'updated_at'=>now(),
             ]);
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')
+                        ->with('success','Data Customer Berhasil Diubah');
     }
 
     /**
@@ -109,7 +113,14 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         $row = Customer::where($id);
-         Customer::where('idcustomer',$id)->delete();
-        return redirect()->route('customer.index');
+        Customer::where('idcustomer',$id)->delete();
+        return redirect()->route('customer.index')
+                        ->with('success','Data Customer Berhasil Dihapus');
+    }
+    public function customerPDF()
+    {
+        $customer = Customer::all();
+        $pdf = PDF::loadView('customer.customerPDF', ['customer'=>$customer]);
+        return $pdf->download('dataCustomer.pdf');
     }
 }

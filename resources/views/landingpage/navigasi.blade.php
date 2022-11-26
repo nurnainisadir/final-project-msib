@@ -13,6 +13,12 @@
                         <a href="{{url('/about')}}" class="nav-item nav-link">About</a>
                         <a href="{{url('/contact')}}" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="{{url('/administrator')}}" class="btn btn-light rounded-pill py-2 px-4 ms-lg-5" style="color : #6785FF">Login</a>
+                    @auth
+                    <a href="{{ url('administrator')}}" class="btn btn-light rounded-pill py-2 px-4 ms-lg-5" style="color : #6785FF">{{auth()->user()->name}}</a>
+
+                    @else
+                    <a href="{{ route('login')}}" class="btn btn-light rounded-pill py-2 px-4 ms-lg-5" style="color : #6785FF">Login</a>
+
+                    @endauth
                 </div>
             </nav>
