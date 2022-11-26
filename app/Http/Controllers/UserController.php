@@ -34,14 +34,14 @@ class UserController extends Controller
      */
     public function prepareData($request)
     {
+        $data = $request->only([
+            'name',
+            'email',
+        ]);
+
         if (! is_null($request->password)) {
             $data['password'] = bcrypt($request->password);
         }
-        $data = array_merge($data, $request->only([
-            'name',
-            'email',
-            'roles',
-        ]));
 
         return $data;
     }
@@ -116,22 +116,14 @@ class UserController extends Controller
         $payload = request()->except(['_method', '_token']);
         $payload = $this->prepareData($request);
 
-        \DB::transaction(function () use ($user, $payload) {
+        \DB::transaction(function () use ($user, $payload, $request) {
             $user->update($payload);
 
-            // // Detach old roles
-            // $user->roles()->detach();
-            // if (isset($payload['roles']) && count($payload['roles']) > 0) {
-            //     // Attach new roles
-            //     $user->roles()->attach($payload['roles']);
-            // }
-
-            // // Detach old permissions
-            // $user->permissions()->detach();
-            // // Attach new permissions
-            // if (isset($payload['permissions']) && count($payload['permissions']) > 0) {
-            //     $user->permissions()->attach($payload['permissions']);
-            // }
+            // Detach old roles
+            $user->roles()->detach();
+            if (isset($request['role_id'])) {
+                $user->roles()->attach($request['role_id']);
+            }
         });
 
         return redirect()->route('users.index')->with('status', 'Data User berhasil disimpan');

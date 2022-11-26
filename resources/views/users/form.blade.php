@@ -49,13 +49,17 @@
                         <div class="invalid-feedback" data-sb-feedback="password:required">Password is required.</div>
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Role</label>
                     <div class="col-sm-5">
                         <select class="form-select form-control" name="role_id">
+                            @php
+                                $old = isset($user) ? $user->roles->first()?->id : old('role_id');
+                            @endphp
                             <option selected>Pilih Role</option>
                             @foreach($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            <option value="{{ $role->id }}" {{ $old == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback" data-sb-feedback="role_id:required">Role is required.</div>
