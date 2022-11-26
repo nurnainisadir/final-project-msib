@@ -27,6 +27,7 @@ class UserStoreRequest extends FormRequest
             'name'      => 'required',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required',
+            'role_id'  => 'required',
         ];
     }
 
@@ -41,6 +42,7 @@ class UserStoreRequest extends FormRequest
             'name' => 'Nama',
             'email' => 'Email',
             'password' => 'Password',
+            'role_id' => 'Role',
         ];
     }
 }

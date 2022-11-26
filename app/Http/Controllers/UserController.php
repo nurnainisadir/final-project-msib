@@ -74,20 +74,12 @@ class UserController extends Controller
         $payload = request()->except(['_method', '_token']);
         $payload = $this->prepareData($request);
 
-        \DB::transaction(function () use ($payload) {
-            $this->user = User::create($payload);
+        \DB::transaction(function () use ($payload, $request) {
+            $user = User::create($payload);
 
-            // $this->user->roles()->detach();
-            // if (isset($payload['roles']) && count($payload['roles']) > 0) {
-            //     $this->user->roles()->detach();
-            //     $this->user->roles()->attach($payload['roles']);
-            // }
-
-            // $this->user->permissions()->detach();
-            // if (isset($payload['permissions']) && count($payload['permissions']) > 0) {
-            //     $this->user->permissions()->detach();
-            //     $this->user->permissions()->attach($payload['permissions']);
-            // }
+            if (isset($request['role_id'])) {
+                $user->roles()->attach($request['role_id']);
+            }
 
         });
 
