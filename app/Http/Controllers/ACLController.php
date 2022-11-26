@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ACLController extends Controller
 {
@@ -26,7 +27,9 @@ class ACLController extends Controller
      */
     public function roleList()
     {
-        return view('acl.role-list');
+        $data['role'] = Role::get(['id', 'name', 'created_at']);
+
+        return view('acl.role-list', $data);
     }
 
     /**
@@ -36,7 +39,7 @@ class ACLController extends Controller
      */
     public function createRole()
     {
-        $data['permissions'] = Permission::whereNull('parent_id')->get(['id', 'name']);
+        $data['permissions'] = Permission::get(['id', 'name']);
 
         return view('acl.role-form', $data);
     }
@@ -48,7 +51,7 @@ class ACLController extends Controller
      */
     public function editRole()
     {
-        $data['permissions'] = Permission::whereNull('parent_id')->get(['id', 'name']);
+        $data['permissions'] = Permission::get(['id', 'name']);
         $data['object'] = Role::findOrFail(request()->id);
 
         return view('acl.role-form', $data);
