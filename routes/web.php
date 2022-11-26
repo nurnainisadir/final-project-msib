@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
@@ -38,7 +39,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/administrator', function () {
         return view('admin.home');
     });
-    
+    Route::resource('users',UserController::class);
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
