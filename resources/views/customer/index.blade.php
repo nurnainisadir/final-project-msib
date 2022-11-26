@@ -25,9 +25,9 @@
         
         <div class="row">
             <div class="col-12">
-                <table class="table table-borderless table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
-                        <tr>
+                        <tr  align="center">
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">No. Telepon</th>

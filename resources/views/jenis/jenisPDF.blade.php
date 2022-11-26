@@ -6,8 +6,8 @@
 </head>
 <body>
     <h3 align="center">Data Jenis</h3>
-    <table class="table">
-        <thead class="table-dark">
+    <table class="table table-striped table-bordered">
+        <thead>
             <tr>
                 <th>No</th>
                 <th>Jenis Laundry</th>
