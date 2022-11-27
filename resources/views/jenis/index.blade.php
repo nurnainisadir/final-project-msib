@@ -27,7 +27,7 @@
             <div class="col-12">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <tr  align="center">
+                        <tr align="center">
                             <th scope="col">No</th>
                             <th scope="col">Jenis Laundry</th>
                             <th scope="col">Harga</th>
@@ -37,7 +37,7 @@
                     <tbody>
                         @php $no = 1; @endphp
                         @foreach($jenis as $row)
-                        <tr>
+                        <tr align="center">
                             <th scope="row">{{$no++}}</th>
                             <td>{{ $row->jenis_laundry }}</td>
                             <td>Rp. {{number_format($row['harga'], 2,',','.')}}</td>

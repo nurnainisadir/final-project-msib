@@ -37,7 +37,7 @@
         <br>
         <div class="d-grid">
             <button class="btn btn-primary" type="submit">Simpan</button>
-             <button type="submit" class="btn btn-secondary">Batal</button></button>
+            <a class="btn btn-secondary" href=" {{ url('jenis') }}">Batal</a>
         </div>
     </form>
 </div>
