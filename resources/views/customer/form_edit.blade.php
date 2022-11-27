@@ -5,7 +5,7 @@ $ar_gender = ['L','P'];
 @endphp
 <div class="container px-5 my-2">
     <div class="card-body">
-            <h3>Form Customer</h3><br>
+            <h3 class="m-0 font-weight-bold text-primary">Form Customer</h3><br>
 
              @if ($errors->any())
                     <div class="alert alert-danger">
@@ -61,7 +61,7 @@ $ar_gender = ['L','P'];
 
         <div class="d-grid">
             <button class="btn btn-primary" type="submit">Submit</button>
-             <button type="submit" class="btn btn-secondary">Batal</button>
+            <a class="btn btn-secondary" href=" {{ url('customer') }}">Batal</a>
         </div>
     </form>
 </div>
