@@ -25,6 +25,10 @@ class PermissionSeeder extends Seeder
 
         // Permission Seeder
         $permissions = [
+            'list user',
+            'tambah user',
+            'edit user',
+            'delete user',
             'list customer',
             'edit customer',
             'delete customer',

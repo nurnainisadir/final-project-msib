@@ -8,14 +8,15 @@
                 <div class="section-title">
                     <h3 class="m-0 font-weight-bold text-primary">Data User</h3><br>
 
-                         @if ($message = Session::get('success'))
+                        @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                         <p>{{ $message }}</p>
                         </div>
                         @endif
-
-                        <a href="{{ route('users.create') }}">
-                        <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah User"></button></a>
+                        @can('tambah user')
+                            <a href="{{ route('users.create') }}">
+                            <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah User"></button></a>
+                        @endcan
                     <br><br>
                 </div>
             </div>
@@ -46,16 +47,21 @@
                             <form method="POST" id="formDelete">
                             @csrf
                             @method('DELETE')
-                                <a class="btn btn-warning btn-sm" title="Edit"
-                                    href=" {{ route('users.edit',$row->id) }}">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                &nbsp;
-                                <button type="submit"
-                                data-action="{{ route('users.destroy',$row->id) }}"
-                                class="btn btn-danger btn-sm btnDelete" title="Hapus">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                @can('edit user')
+                                    <a class="btn btn-warning btn-sm" title="Edit"
+                                        href=" {{ route('users.edit',$row->id) }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    &nbsp;
+                                @endcan
+
+                                @can('delete user')
+                                    <button type="submit"
+                                        data-action="{{ route('users.destroy',$row->id) }}"
+                                        class="btn btn-danger btn-sm btnDelete" title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                    </button>
+                                @endcan
                             </form>
                             </td>
                         </tr>

@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        // if (! auth()->user()->can('list users')) {
-        //     abort(403);
-        // }
+        if (! auth()->user()->can('list user')) {
+            abort(403);
+        }
 
         $user = User::orderBy('created_at', 'desc')->get();
 
@@ -53,9 +53,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        // if (! auth()->user()->can('create user')) {
-        //     abort(403);
-        // }
+        if (! auth()->user()->can('tambah user')) {
+            abort(403);
+        }
 
         $data['roles'] = \Spatie\Permission\Models\Role::get(['id', 'name']);
         $data['permissions'] = \Spatie\Permission\Models\Permission::get(['id', 'name']);
@@ -93,9 +93,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // if (! auth()->user()->can('edit user')) {
-        //     abort(403);
-        // }
+        if (! auth()->user()->can('edit user')) {
+            abort(403);
+        }
 
         $data['user'] = User::findOrFail($id);
         $data['roles'] = \Spatie\Permission\Models\Role::get(['id', 'name']);
@@ -137,9 +137,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // if (! auth()->user()->can('delete user')) {
-        //     abort(403);
-        // }
+        if (! auth()->user()->can('delete user')) {
+            abort(403);
+        }
 
         $user = User::findOrFail($id);
         if ($user->id == request()->user()->id) {
