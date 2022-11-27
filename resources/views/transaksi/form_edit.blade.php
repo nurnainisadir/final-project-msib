@@ -18,7 +18,7 @@ $ar_karyawan = App\Models\Karyawan::all();
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                         @endforeach
-                        </ul>
+                    </ul>
                 </div>
                 @endif
             <form method="POST" action="{{ route('transaksi.update',$row->idtransaksi) }}" enctype="multipart/form-data">
@@ -101,7 +101,7 @@ $ar_karyawan = App\Models\Karyawan::all();
 
                 <div class="d-grid">
                 <button class="btn btn-primary" type="submit">Submit</button>
-                <button type="submit" class="btn btn-secondary">Batal</button>
+                <a class="btn btn-secondary" href=" {{ url('transaksi') }}">Batal</a>
                 </div>
             </form>
         </div>
