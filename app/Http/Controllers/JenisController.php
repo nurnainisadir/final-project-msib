@@ -43,7 +43,16 @@ class JenisController extends Controller
         $request->validate([
             'jenis_laundry' => 'required:jenis|max:30',
             'harga' => 'required:jenis|max:11'
-        ]);
+        ],
+        
+        [
+            'jenis_laundry.required'=>'Jenis Laundry Wajib Diisi',
+            'jenis_laundry.max'=>'Jenis Laundry Maksimal 30 karakter',
+            'harga.required'=>'Harga Wajib Diisi',
+            'harga.max'=>'Harga Maksimal 11 karakter',
+        ]
+    
+    );
       
         Jenis::create($request->all());
        

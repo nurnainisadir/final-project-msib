@@ -43,9 +43,20 @@ class CustomerController extends Controller
         $request->validate([
             'nama_customer' => 'required:customer|max:50',
             'no_tlp' => 'required:customer|max:15',
-            'gender'=> 'required',
+            'gender'=> 'required|in:L,P',
             'alamat' => 'required:customer|max:50'
-        ]);
+        ],
+
+        [
+            'nama_customer.required'=>'Nama Customer Wajib Diisi',
+            'nama_customer.max'=>'Nama Customer Maksimal 50 karakter',
+            'no_tlp.required'=>'No. Telepon Wajib Diisi',
+            'no_tlp.max'=>'No. Telepon Maksimal 15 karakter',
+            'gender.required'=>'Gender Wajib Diisi',
+            'alamat.required'=>'Alamat Wajib Diisi',
+            'alamat.max'=>'Alamat Maksimal 50 karakter',
+        ]
+    );
       
         Customer::create($request->all());
        
