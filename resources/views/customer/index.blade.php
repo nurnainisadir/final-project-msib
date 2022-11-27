@@ -27,7 +27,7 @@
             <div class="col-12">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <tr  align="center">
+                        <tr align="center">
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">No. Telepon</th>
@@ -39,7 +39,7 @@
                     <tbody>
                         @php $no = 1; @endphp
                         @foreach($customer as $row)
-                        <tr>
+                        <tr align="center">
                             <th scope="row">{{$no++}}</th>
                             <td>{{ $row->nama_customer }}</td>
                             <td>{{ $row->no_tlp }}</td>
