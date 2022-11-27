@@ -42,7 +42,7 @@
                     <tbody>
                         @php $no = 1; @endphp
                         @foreach($karyawan as $row)
-                        <tr>
+                        <tr align="center">
                             <th scope="row">{{$no++}}</th>
                             <td>{{ $row->kode_karyawan }}</td>
                             <td>{{ $row->nama_karyawan }}</td>

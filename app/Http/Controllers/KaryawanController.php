@@ -48,7 +48,23 @@ class KaryawanController extends Controller
             'gender'=> 'required|in:L,P',
             'alamat' => 'required:karyawan|max:50',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-        ]);
+        ],
+        
+        //costum pesan errornya
+        [
+            
+            'kode_karyawan.required'=>'Kode Karyawan Wajib Diisi',
+            'kode_karyawan.unique'=>'Kode Karyawan Sudah Ada (Terduplikasi)',
+            'kode_karyawan.max'=>'Kode Maksimal 20 karakter',
+            'nama_karyawan.required'=>'Nama Karyawan Wajib Diisi',
+            'nama_karyawan.max'=>'Nama Karyawan Maksimal 50 karakter',
+            'no_tlp.required'=>'No. Telepon Wajib Diisi',
+            'no_tlp.max'=>'No. Telepon Maksimal 15 karakter',
+            'gender.required'=>'Gender Wajib Diisi',
+            'alamat.required'=>'Alamat Wajib Diisi',
+            'alamat.max'=>'Alamat Maksimal 50 karakter',
+        ]
+        );
       
         if(!empty($request->foto)){
             $fileName = 'foto-'.$request->kode_karyawan.'.'.$request->foto->extension();
