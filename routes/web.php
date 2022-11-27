@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ACLController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,18 @@ Route::middleware('auth')->group(function(){
     Route::get('/administrator', function () {
         return view('admin.home');
     });
-    
+    Route::resource('users',UserController::class);
+    Route::prefix('acl')->name('acl.')->group(function () {
+        Route::get('permission', [ACLController::class, 'permissionList'])->name('permission.index');
+        Route::prefix('role')->name('role.')->group(function () {
+            Route::get('/', [ACLController::class, 'roleList'])->name('index');
+            Route::get('/create', [ACLController::class, 'createRole'])->name('create');
+            Route::post('/create', [ACLController::class, 'storeRole'])->name('store');
+            Route::get('/{id}/edit', [ACLController::class, 'editRole'])->name('edit');
+            Route::patch('/{id}/edit', [ACLController::class, 'updateRole'])->name('update');
+            Route::delete('/{id}/destroy', [ACLController::class, 'deleteRole'])->name('destroy');
+        });
+    });
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
