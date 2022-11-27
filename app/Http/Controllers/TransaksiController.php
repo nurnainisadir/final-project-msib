@@ -56,7 +56,23 @@ class TransaksiController extends Controller
             'tgl_ambil' => 'required',
             'total_bayar' => 'required|integer',
             'karyawan_id' => 'required|integer',
-        ]);
+        ],
+        [
+            'customer_id.required'=>'Customer Wajib Diisi',
+            'customer_id.integer'=>'Customer Wajib Diisi',
+            'jenis_id.required'=>'Jenis Laundry Wajib Diisi',
+            'jenis_id.integer'=>'Jenis Laundry Wajib Diisi',
+            'berat.required'=>'Berat Wajib Diisi',
+            'berat.integer'=>'Berat Wajib Diisi',
+            'tgl_awal.required'=>'Tanggal Awal Wajib Diisi',
+            'tgl_ambil.required'=>'Tanggal Ambil Wajib Diisi',
+            'total_bayar.required'=>'Total Bayar Wajib Diisi',
+            'total_bayar.integer'=>'Total Bayar Wajib Diisi',
+            'karyawan_id.required'=>'Karyawan Wajib Diisi',
+            'karyawan_id.integer'=>'Karyawan Wajib Diisi',
+        ]
+        
+        );
 
         
         DB::table('transaksi')->insert(
@@ -115,7 +131,8 @@ class TransaksiController extends Controller
             'tgl_ambil' => 'required',
             'total_bayar' => 'required|integer',
             'karyawan_id' => 'required|integer',
-        ]);
+        ]
+    );
 
         DB::table('transaksi')->where('idtransaksi',$id)->update(
             [
