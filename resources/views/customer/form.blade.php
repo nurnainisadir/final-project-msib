@@ -69,10 +69,10 @@ $ar_gender = ['L','P'];
             <div class="col-md-5">
             <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" type="text" name="alamat" style="height: 100px">{{ old('alamat') }}</textarea>
             @error('alamat')
-                    <div class="invalid-feedback">
-                    {{ $message }}
-                    </div>
-                    @enderror
+                <div class="invalid-feedback">
+                {{ $message }}
+                </div>
+            @enderror
         </div>
         </div>
 
