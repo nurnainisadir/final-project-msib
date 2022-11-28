@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/administrator', function () {
         return view('admin.home');
     });
+    Route::get('/kelola_user', function () {
+        return view('admin.home');
+    });
     
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
@@ -54,6 +57,10 @@ Route::middleware('auth')->group(function(){
     Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
     Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
     Route::get('dashboard', [DashboardController::class,'index']);
+    Route::get('after_register', [RegisterController::class,'index']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/after_register', function () {
+    return view('landingpage.after_register');
+});
