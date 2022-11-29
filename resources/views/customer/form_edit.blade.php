@@ -54,7 +54,7 @@ $ar_gender = ['L','P'];
 
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
-            <div class="col-md-7">
+            <div class="col-md-5">
                 <textarea class="form-control" id="alamat" type="text" name="alamat" style="height: 100px" >{{ $row->alamat }}</textarea>
                 <div class="invalid-feedback" data-sb-feedback="alamat:required">Alamat is required.</div>
             </div>
