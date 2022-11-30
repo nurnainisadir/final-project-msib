@@ -1,13 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ACLController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +38,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/administrator', function () {
         return view('admin.home');
     });
+    Route::get('/kelola_user', function () {
+        return view('admin.home');
+    });
     Route::resource('users',UserController::class);
     Route::prefix('acl')->name('acl.')->group(function () {
         Route::get('permission', [ACLController::class, 'permissionList'])->name('permission.index');
@@ -52,7 +53,6 @@ Route::middleware('auth')->group(function(){
             Route::delete('/{id}/destroy', [ACLController::class, 'deleteRole'])->name('destroy');
         });
     });
-    
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
@@ -68,6 +68,10 @@ Route::middleware('auth')->group(function(){
     Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
     Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
     Route::get('dashboard', [DashboardController::class,'index']);
+    Route::get('after_register', [RegisterController::class,'index']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/after_register', function () {
+    return view('landingpage.after_register');
+});

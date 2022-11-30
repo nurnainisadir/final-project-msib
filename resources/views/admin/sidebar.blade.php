@@ -15,21 +15,7 @@
       <div class="sidebar-heading">
         Fitur
       </div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-          <i class="far fa-fw fa-window-maximize"></i>
-          <span>User Management</span>
-        </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('/users')}}">Data User</a>
-            <a class="collapse-item" href="{{url('/acl/permission')}}">Data Permission</a>
-            <a class="collapse-item" href="{{url('/acl/role')}}">Data Role</a>
-          </div>
-        </div>
-      </li>
-      </li>
+    
 <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -48,13 +34,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
           <i class="fab fa-fw fa-wpforms"></i>
-          <span>Manage User</span>
+          <span>User Management</span>
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="">Data User</a>
-            <a class="collapse-item" href="">Data Permission</a>
-            <a class="collapse-item" href="">Data Role</a>
+            <a class="collapse-item" href="{{url('/users')}}">Data User</a>
+            <a class="collapse-item" href="{{url('/acl/permission')}}">Data Permission</a>
+            <a class="collapse-item" href="{{url('/acl/role')}}">Data Role</a>
           </div>
         </div>
       </li>
