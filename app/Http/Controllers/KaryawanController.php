@@ -42,7 +42,7 @@ class KaryawanController extends Controller
     {
         //var_dump(request()->file('foto')); die;
         $request->validate([
-            'kode_karyawan' => 'required:karyawan|max:20',
+            'kode_karyawan' => 'required|unique:karyawan|max:20',
             'nama_karyawan' => 'required:karyawan|max:50',
             'no_tlp' => 'required:karyawan|max:15',
             'gender'=> 'required|in:L,P',

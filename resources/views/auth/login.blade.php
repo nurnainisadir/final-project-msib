@@ -1,3 +1,6 @@
+@extends('landingpage.index')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>RuangAdmin - Login</title>
+  <title>Login</title>
   <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('assets/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -59,7 +62,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="font-weight-bold small" href="register.html">Create an Account!</a>
+                    <a class="font-weight-bold small" href="{{ route('register') }}">Create an Account!</a>
                   </div>
                   <div class="text-center">
                   </div>
@@ -79,3 +82,4 @@
 </body>
 
 </html>
+@endsection

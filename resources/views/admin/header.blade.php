@@ -154,31 +154,50 @@
                 <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
               </div>
             </li>
+
             <div class="topbar-divider d-none d-sm-block"></div>
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="{{ url('assets/img/boy.png')}}" style="max-width: 60px">
-                <span class="ml-2 d-none d-lg-inline text-white small">ADMIN</span>
+                <img class="img-profile rounded-circle" src="{{ url('user')}}/{{Auth::user()->foto}}" alt="profile" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-white small"> 
+                @if(empty(Auth::user()->name))
+                    {{ '' }}
+                    @else
+                    {{ Auth::user()->name }}
+                @endif
+              </span>
               </a>
+              
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#">   
+                <center>
+                  <span> <b>{{ Auth::user()->name }} </b></span>
+                  <br>
+                  <span>{{ Auth::user()->role }}</span>
+                </center>
+              </a>
+              <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
+
+                @if(Auth::user()->role == 'admin')
+                <a class="dropdown-item" href="{{ url('kelola_user') }}">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
+                  Manage User
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                @endif
+
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{ __('Logout') }}
                 </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+                </form>
               </div>
             </li>
           </ul>

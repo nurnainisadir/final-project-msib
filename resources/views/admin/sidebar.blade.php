@@ -15,7 +15,7 @@
       <div class="sidebar-heading">
         Fitur
       </div>
-<li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
@@ -44,6 +44,19 @@
           </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Manage User</span>
+        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="">Data User</a>
+            <a class="collapse-item" href="">Data Permission</a>
+            <a class="collapse-item" href="">Data Role</a>
+          </div>
+        </div>
       </li>
 
       <hr class="sidebar-divider">
@@ -55,15 +68,5 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Riwayat Transaksi</span>
         </a>
-
-      <hr class="sidebar-divider">
-       <li class="nav-item">
-        <form action="{{ route('logout') }}" method="POST">
-          @csrf
-          <button class="nav-link">
-          <i class="bi bi-box-arrow-right"></i>
-          <span>Logout</span>
-        </button>
-        </form>
       </li>
     </ul>
