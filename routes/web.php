@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function(){
             Route::delete('/{id}/destroy', [ACLController::class, 'deleteRole'])->name('destroy');
         });
     });
+    
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
