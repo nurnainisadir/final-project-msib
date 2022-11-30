@@ -41,7 +41,18 @@ Route::middleware('auth')->group(function(){
     Route::get('/kelola_user', function () {
         return view('admin.home');
     });
-    
+    Route::resource('users',UserController::class);
+    Route::prefix('acl')->name('acl.')->group(function () {
+        Route::get('permission', [ACLController::class, 'permissionList'])->name('permission.index');
+        Route::prefix('role')->name('role.')->group(function () {
+            Route::get('/', [ACLController::class, 'roleList'])->name('index');
+            Route::get('/create', [ACLController::class, 'createRole'])->name('create');
+            Route::post('/create', [ACLController::class, 'storeRole'])->name('store');
+            Route::get('/{id}/edit', [ACLController::class, 'editRole'])->name('edit');
+            Route::patch('/{id}/edit', [ACLController::class, 'updateRole'])->name('update');
+            Route::delete('/{id}/destroy', [ACLController::class, 'deleteRole'])->name('destroy');
+        });
+    });
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
