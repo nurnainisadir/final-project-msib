@@ -6,63 +6,60 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h3 class="m-0 font-weight-bold text-primary">Data Customer</h3><br>
+                    <h3 class="m-0 font-weight-bold text-primary">Data User</h3><br>
 
-                         @if ($message = Session::get('success'))
+                        @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                         <p>{{ $message }}</p>
                         </div>
                         @endif
-
-                        <a href="{{ route('customer.create') }}">
-                        <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah Customer"></button></a>&nbsp;
-                        <a href="{{ url('customer-pdf')}}">
-                        <button type="button" class="btn btn-danger bi-file-earmark-pdf btn-sm" title="Export PDF"></button></a>
+                        
+                        <a href="{{ route('users.create') }}">
+                        <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah"></button></a>&nbsp;
                     <br><br>
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-12">
-                <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered">
                     <thead>
-                        <tr align="center">
+                        <tr  align="center">
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">No. Telepon</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Alamat</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Isactive</th>
+                            <th scope="col">Tanggal Buat</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php $no = 1; @endphp
-                        @foreach($customer as $row)
+                        @foreach($user as $row)
                         <tr align="center">
                             <th scope="row">{{$no++}}</th>
-                            <td>{{ $row->nama_customer }}</td>
-                            <td>{{ $row->no_tlp }}</td>
-                            <td>{{ $row->gender }}</td>
-                            <td>{{ $row->alamat }}</td>
-                            <td>
+                            <td>{{ $row->name }}</td>
+                            <td>{{ $row->email }}</td>
+                            <td>{{ $row->role }}</td>
+                            <td>{{ $row->isactive }}</td>
+                            <td>{{ $row->created_at }}</td>
 
+                            <td>
                             <form method="POST" id="formDelete">
                             @csrf
                             @method('DELETE')
                                 <a class="btn btn-warning btn-sm" title="Edit"
-                                    href=" {{ route('customer.edit',$row->idcustomer) }}">
+                                    href=" {{ route('users.edit',$row->id) }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 &nbsp;
-
-                                @if(auth()->user()->role==='admin')
                                 <button type="submit" 
-                                data-action="{{ route('customer.destroy',$row->idcustomer) }}"
+                                data-action="{{ route('users.destroy',$row->id) }}"
                                 class="btn btn-danger btn-sm btnDelete" title="Hapus">
                                     <i class="bi bi-trash"></i>
                                 </button>
-                                @endif
                             </form>
                             </td>
                         </tr>

@@ -19,8 +19,9 @@
                     <img src="{{ url('img')}}/{{$row->foto}}" alt="Profile" style="width: 75%">
                     @endempty
                     </div>
+                    </center>
                 </div>
-                </center>
+                
                 <div class="col-lg-6 col-md-6 align-self-center">
                     <div class="content-block">
                         <div class="name">
@@ -30,6 +31,7 @@
                             <br>
                                 <li>Kode Karyawan : {{ $row->kode_karyawan }}</li>
                                 <li>No Tlp        : {{ $row->no_tlp }}</li>
+                                <li>Jenis kelamin : {{ $row->gender }}</li>
                                 <li>Alamat        : {{ $row->alamat }}</li>
                                 <br><br>
                                 <a href="{{ url('/karyawan')}}">

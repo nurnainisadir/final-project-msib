@@ -1,3 +1,6 @@
+@extends('landingpage.index')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>RuangAdmin - Login</title>
+  <title>Login</title>
   <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('assets/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -20,7 +23,7 @@
   <!-- Login Content -->
   <div class="container-login">
     <div class="row justify-content-center">
-      <div class="col-xl-6 col-lg-12 col-md-9">
+      <div class="col-xl-6 col-lg-12 col-md-6">
         <div class="card shadow-sm my-5">
           <div class="card-body p-0">
             <div class="row">
@@ -42,8 +45,7 @@
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember
-                          Me</label>
+                        <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
                     <div class="form-group">
@@ -59,7 +61,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="font-weight-bold small" href="register.html">Create an Account!</a>
+                    <a class="font-weight-bold small" href="{{ route('register') }}">Create an Account!</a>
                   </div>
                   <div class="text-center">
                   </div>
@@ -79,3 +81,4 @@
 </body>
 
 </html>
+@endsection

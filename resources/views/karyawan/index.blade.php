@@ -13,9 +13,11 @@
                         <p>{{ $message }}</p>
                         </div>
                         @endif
-
+                        
+                        @if(auth()->user()->role==='admin')
                         <a href="{{ route('karyawan.create') }}">
                         <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah Karyawan"></button></a>&nbsp;
+                        @endif
                         <a href="{{ url('karyawan-pdf')}}">
                         <button type="button" class="btn btn-danger bi-file-earmark-pdf btn-sm" title="Export PDF"></button></a>&nbsp;
                         <a href="{{ url('karyawan-excel')}}">
@@ -33,8 +35,6 @@
                             <th scope="col">Kode</th>
                             <th scope="col">Nama Karyawan</th>
                             <th scope="col">No. Telepon</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Alamat</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -47,8 +47,6 @@
                             <td>{{ $row->kode_karyawan }}</td>
                             <td>{{ $row->nama_karyawan }}</td>
                             <td>{{ $row->no_tlp }}</td>
-                            <td>{{ $row->gender }}</td>
-                            <td>{{ $row->alamat }}</td>
                             <td width="10%">
                                 @empty($row->foto)
                                 <img src="{{ url('img/foto/nophoto.png') }}" width="35%" alt="Profile" class="rounded-circle">
@@ -65,16 +63,20 @@
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 &nbsp;
+                                @if(auth()->user()->role==='admin')
                                 <a class="btn btn-warning btn-sm" title="Edit"
                                     href=" {{ route('karyawan.edit',$row->idkaryawan) }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
+                                @endif
                                 &nbsp;
+                                @if(auth()->user()->role==='admin')
                                 <button type="submit" 
                                 data-action="{{ route('karyawan.destroy',$row->idkaryawan) }}"
                                 class="btn btn-danger btn-sm btnDelete" title="Hapus">
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                @endif
                             </form>
                             </td>
                         </tr>
@@ -85,10 +87,12 @@
         </div>
     </div>
 </section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script type="text/javascript">
+   
     $('body').on('click', '.btnDelete', function(e) {
     e.preventDefault();
     var action = $(this).data('action');

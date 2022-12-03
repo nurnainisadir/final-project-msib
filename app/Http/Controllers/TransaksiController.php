@@ -15,6 +15,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin',['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

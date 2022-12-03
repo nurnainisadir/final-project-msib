@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-	<h3 align="center">Data Customer</h3>
-    <table class="table">
+	<h4 align="center">Data Customer</h4>
+    <table class="table table-bordered">
         <thead class="table-dark">  
             <tr>
                 <th>No</th>

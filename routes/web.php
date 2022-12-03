@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,16 +42,20 @@ Route::middleware('auth')->group(function(){
     Route::get('/kelola_user', function () {
         return view('admin.home');
     });
+    Route::get('/access_denied', function () {
+        return view('admin.access_denied');
+    });
     
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
     Route::resource('karyawan',KaryawanController::class);
     Route::resource('transaksi',TransaksiController::class);
+    Route::resource('users',UserController::class);
     Route::get('transaksi-edit/{idtransaksi}', [TransaksiController::class,'edit']);
     Route::get('jenis-edit/{idjenis}', [JenisController::class,'edit']);
     Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
     Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
-    //Route::delete('customer/{id}', [CustomerController::class, 'delete']);
+    Route::get('users-edit/{id}', [UserController::class,'edit']);
     Route::get('customer-pdf', [CustomerController::class,'customerPDF']);
     Route::get('karyawan-pdf', [KaryawanController::class,'karyawanPDF']);
     Route::get('jenis-pdf', [JenisController::class,'jenisPDF']);

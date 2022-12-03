@@ -50,11 +50,14 @@
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 &nbsp;
+
+                                @if(auth()->user()->role==='admin')
                                 <button type="submit" 
                                 data-action="{{ route('jenis.destroy',$row->idjenis) }}"
                                 class="btn btn-danger btn-sm btnDelete" title="Hapus">
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                @endif
                             </form>
                             </td>
                         </tr>

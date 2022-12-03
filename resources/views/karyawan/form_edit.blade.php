@@ -61,7 +61,7 @@ $ar_gender = ['L','P'];
         
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
-            <div class="col-md-7">
+            <div class="col-md-5">
             <textarea class="form-control" id="alamat" type="text" name="alamat" style="height: 100px" >{{ $row->alamat }}</textarea>
             <div class="invalid-feedback" data-sb-feedback="alamat:required">Alamat is required.</div>
         </div>
@@ -69,13 +69,12 @@ $ar_gender = ['L','P'];
 
         <div class="row mb-3">
             <label for="inputNumber" class="col-sm-2 col-form-label">Foto</label>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <input type="file" name="foto" class="form-control">
                 @if(!empty($row->foto)) <img src="{{ url('img')}}/{{$row->foto}}" 
-                                                             width="10%" class="img-thumbnail">
-                                <br/>{{$row->foto}}
-                                @endif
-                
+                width="10%" class="img-thumbnail">
+                <br/>{{$row->foto}}
+                @endif
             </div>
         </div>
         <br>
