@@ -3,7 +3,7 @@
 @if(Auth::user()->role == 'admin')
 <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Kelola user</h1>
+            <h1 class="h3 mb-0 text-gray-800">Kelola User</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
@@ -65,6 +65,7 @@
                 </div>
               </div>
             </div>
+<<<<<<<<< Temporary merge branch 1
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
@@ -83,6 +84,8 @@
                 </div>
               </div>
             </div>
+=========
+>>>>>>>>> Temporary merge branch 2
 @else
 @include('admin.access_denied')
 @endif
