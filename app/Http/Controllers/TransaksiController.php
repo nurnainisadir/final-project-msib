@@ -7,9 +7,11 @@ use App\Models\Transaksi;
 use App\Models\Customer;
 use App\Models\Jenis;
 use App\Models\Karyawan;
+use App\Models\User;
 use DB;
 use PDF;
 use Alert;
+use Carbon\Carbon;
 use App\Exports\TransaksiExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,7 +29,8 @@ class TransaksiController extends Controller
     {
         //tampilkan seluruh data
         $transaksi = Transaksi::orderBy('idtransaksi', 'ASC')->get();
-        return view('transaksi.index',compact('transaksi'));    }
+        return view('transaksi.index',compact('transaksi'));    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,11 +39,13 @@ class TransaksiController extends Controller
      */
     public function create()
     {
+
         $ar_customer = Customer::all();
         $ar_jenis = Jenis::all();
         $ar_karyawan = Karyawan::all();
+        $ar_users = User::all();
         //arahkan ke form input data
-        return view('transaksi.form',compact('ar_customer','ar_jenis','ar_karyawan'));
+        return view('transaksi.form',compact('ar_customer','ar_jenis','ar_karyawan','ar_users'));
     }
 
     /**
@@ -56,9 +61,10 @@ class TransaksiController extends Controller
             'jenis_id' => 'required|integer',
             'berat' => 'required|integer',
             'tgl_awal' => 'required',
-            'tgl_ambil' => 'required',
-            'total_bayar' => 'required|integer',
-            'karyawan_id' => 'required|integer',
+            //'tgl_ambil' => 'required',
+            //'total_bayar' => 'required|integer',
+            //'status' => 'required',
+            'users_id' => 'required|integer',
         ],
         [
             'customer_id.required'=>'Customer Wajib Diisi',
@@ -68,9 +74,10 @@ class TransaksiController extends Controller
             'berat.required'=>'Berat Wajib Diisi',
             'berat.integer'=>'Berat Wajib Diisi',
             'tgl_awal.required'=>'Tanggal Awal Wajib Diisi',
-            'tgl_ambil.required'=>'Tanggal Ambil Wajib Diisi',
-            'total_bayar.required'=>'Total Bayar Wajib Diisi',
-            'total_bayar.integer'=>'Total Bayar Wajib Diisi',
+            //'tgl_ambil.required'=>'Tanggal Ambil Wajib Diisi',
+            //'total_bayar.required'=>'Total Bayar Wajib Diisi',
+            //'total_bayar.integer'=>'Total Bayar Wajib Diisi',
+            //'status' => 'Status Wajib Diisi',
             'karyawan_id.required'=>'Karyawan Wajib Diisi',
             'karyawan_id.integer'=>'Karyawan Wajib Diisi',
         ]
@@ -86,7 +93,7 @@ class TransaksiController extends Controller
                 'tgl_awal'=>$request->tgl_awal,
                 'tgl_ambil'=>$request->tgl_ambil,
                 'total_bayar'=>$request->total_bayar,
-                'karyawan_id'=>$request->karyawan_id,
+                'users_id'=>$request->users_id,
                 'created_at'=>now(),
             ]);
        
@@ -103,6 +110,19 @@ class TransaksiController extends Controller
     public function show($id)
     {
        
+    }
+
+    
+    public function showAjax(Transaksi $transaksi)
+    {
+        $transaksi->load(['customer', 'jenis', 'karyawan','users']);
+        $transaksi = $transaksi->toArray();
+        $transaksi['total_bayar'] = number_format($transaksi['total_bayar'], 2, ',', '.');
+        $transaksi['tgl_awal'] = Carbon::parse($transaksi['tgl_awal'])->format('d/m/Y');
+        $transaksi['tgl_ambil'] = Carbon::parse($transaksi['tgl_ambil'])->format('d/m/Y');
+        $transaksi['created_at'] = Carbon::parse($transaksi['created_at'])->format('d/m/Y h:i');
+        $transaksi['updated_at'] = Carbon::parse($transaksi['updated_at'])->format('d/m/Y h:i');
+        return response()->json($transaksi);
     }
 
     /**
@@ -131,10 +151,26 @@ class TransaksiController extends Controller
             'jenis_id' => 'required|integer',
             'berat' => 'required|integer',
             'tgl_awal' => 'required',
-            'tgl_ambil' => 'required',
-            'total_bayar' => 'required|integer',
-            'karyawan_id' => 'required|integer',
+            //'tgl_ambil' => 'required',
+            //'total_bayar' => 'required|integer',
+            'status' => 'required',
+            'users_id' => 'required',
+        ],
+
+        [
+            'customer_id.required'=>'Customer Wajib Diisi',
+            'customer_id.integer'=>'Customer Wajib Diisi',
+            'jenis_id.required'=>'Jenis Laundry Wajib Diisi',
+            'jenis_id.integer'=>'Jenis Laundry Wajib Diisi',
+            'berat.required'=>'Berat Wajib Diisi',
+            'berat.integer'=>'Berat Wajib Diisi',
+            'tgl_awal.required'=>'Tanggal Awal Wajib Diisi',
+            'tgl_ambil.required'=>'Tanggal Ambil Wajib Diisi',
+            'total_bayar.required'=>'Total Bayar Wajib Diisi',
+            'total_bayar.integer'=>'Total Bayar Wajib Diisi',
+            'status' => 'Status Wajib Diisi',
         ]
+        
     );
 
         DB::table('transaksi')->where('idtransaksi',$id)->update(
@@ -145,8 +181,8 @@ class TransaksiController extends Controller
                 'tgl_awal'=>$request->tgl_awal,
                 'tgl_ambil'=>$request->tgl_ambil,
                 'total_bayar'=>$request->total_bayar,
-                'karyawan_id'=>$request->karyawan_id,
-                'created_at'=>now(),
+                'status'=>$request->status,
+                'users_id'=>$request->users_id,
             ]); 
        
         return redirect()->route('transaksi.index')
@@ -173,11 +209,19 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::all();
         $pdf = PDF::loadView('transaksi.transaksiPDF', ['transaksi'=>$transaksi]);
-        return $pdf->download('transaksi.pdf');
+        return $pdf->download('Data-transaksi.pdf');
+    }
+
+    public function unduhPDF($id)
+    {
+        $transaksi = Transaksi::find($id); 
+        $pdf = PDF::loadView('transaksi.unduhPDF', ['transaksi'=>$transaksi]);
+        return $pdf->stream('transaksi.pdf');
     }
 
     public function transaksiExcel() 
     {
         return Excel::download(new TransaksiExport, 'transaksi.xlsx');
     }
+
 }

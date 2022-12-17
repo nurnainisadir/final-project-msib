@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use Alert;
+use Auth;
 
 class UserController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin');
+        $this->middleware('admin',['only'=>['destroy','edit','update']]);
         
     }
     /**
@@ -20,7 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //tampilkan seluruh data
+        if(Auth::user()->role == 'karyawan'){
+            return abort(403);
+        }
+
         $user=user::orderBy('id', 'ASC')->get();
         return view('users.index',compact('user'));
     }
@@ -79,7 +83,7 @@ class UserController extends Controller
             [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=>$request->password,
+                'password'=>bcrypt($request->password),
                 'role'=>$request->role,
                 'isactive'=>$request->isactive,
                 'foto'=>$fileName,
@@ -102,6 +106,12 @@ class UserController extends Controller
         return view('users.detail',compact('row'));
     }
 
+    public function profil()
+    {
+        $row = Auth::user();
+        return view('users.profil',compact('row'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,6 +124,13 @@ class UserController extends Controller
         return view('users.form_edit',compact('row'));
     }
 
+
+    public function editprofil()
+    {
+        $row = Auth::user();
+        return view('users.edit-profil',compact('row'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -121,37 +138,56 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function updateprofil(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required:users|max:25',
-            'email' => 'required:users|max:50',
-            'password' => 'required:users|min:8',
-            'role'=> 'required|in:admin,karyawan',
-            'isactive' => 'required:users',
+            'name' => 'required|max:45',
+            'email' => 'required|max:45',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
-        
+
         $row = DB::table('users')->where('id',$id)->first();
 
         if(!empty($request->foto)){
             if(!empty($row->foto)) unlink('user/'.$row->foto);
-            $fileName = 'foto-'.$request->kode_karyawan.'.'.$request->foto->extension();
+            $fileName = 'foto-'.$request->name.'.'.$request->foto->extension();
             //$fileName = $request->foto->getClientOriginalName();
             $request->foto->move(public_path('user'),$fileName);
         }
         else{
             $fileName = $row->foto;
         }
+
+        DB::table('users')->where('id', $id)->update(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'foto' => $fileName,
+            ]
+        );
+
+        return redirect()->route('profil')
+                        ->with('success','Profil User Berhasil Diubah');
+    }
+
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required:users|max:25',
+            'email' => 'required:users|max:50',
+            'role'=> 'required|in:admin,karyawan',
+            'isactive' => 'required:users',
+        ]);
+        
          DB::table('users')->where('id',$id)->update(
             [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=>$request->password,
                 'role'=>$request->role,
                 'isactive'=>$request->isactive,
-                'foto'=>$fileName,
-                'created_at'=>now(),
             ]);
         return redirect()->route('users.index')
                         ->with('success','Data User Berhasil Diubah');

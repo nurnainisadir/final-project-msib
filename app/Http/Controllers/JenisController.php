@@ -125,10 +125,38 @@ class JenisController extends Controller
         return redirect()->route('jenis.index')
                         ->with('success','Data Jenis Berhasil Dihapus');
     }
+
     public function jenisPDF()
     {
         $jenis = Jenis::all();
         $pdf = PDF::loadView('jenis.jenisPDF', ['jenis'=>$jenis]);
         return $pdf->download('dataJenis.pdf');
     }
+
+	public function apiJenis()
+    {
+        $jenis = Jenis::all();
+       return response()->json(
+       [
+       'message'=>'Data Jenis',
+       'data'=>$jenis
+       ],200);
+     }
+       
+     public function apiJenisid($idjenis)
+     {
+        $jenis = Jenis::find($idjenis);
+        if($jenis){
+            return response()->json(
+                [
+                'message'=>'Detail jenis',
+                'data'=>$jenis,
+                ],200);
+        }else{
+            return response()->json(
+                [
+                'message'=>'Jenis tidak ada',
+                ],200);
+        }
+     }
 }

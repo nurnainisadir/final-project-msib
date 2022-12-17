@@ -7,6 +7,7 @@ use App\Models\Karyawan;
 use DB;
 use PDF;
 use Alert;
+use Carbon\Carbon;
 
 class KaryawanController extends Controller
 {
@@ -106,6 +107,15 @@ class KaryawanController extends Controller
         return view('karyawan.detail',compact('row'));
     }
 
+    public function showAjax(Karyawan $karyawan)
+    {
+        $karyawan = $karyawan->toArray();
+        $karyawan['foto'] = url('img') . '/' . $karyawan['foto'];
+        $karyawan['created_at'] = Carbon::parse($karyawan['created_at'])->format('d/m/Y h:i');
+        $karyawan['updated_at'] = Carbon::parse($karyawan['updated_at'])->format('d/m/Y h:i');
+        return response()->json($karyawan);
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *

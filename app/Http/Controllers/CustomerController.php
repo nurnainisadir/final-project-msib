@@ -131,10 +131,38 @@ class CustomerController extends Controller
         return redirect()->route('customer.index')
                         ->with('success','Data Customer Berhasil Dihapus');
     }
+
     public function customerPDF()
     {
         $customer = Customer::all();
         $pdf = PDF::loadView('customer.customerPDF', ['customer'=>$customer]);
         return $pdf->download('dataCustomer.pdf');
+    }
+
+    public function apiCustomer()
+    {
+        $customer = Customer::all();
+       return response()->json(
+       [
+       'message'=>'Data Customer',
+       'data'=>$customer,
+       ],200);
+    }
+
+    public function apiCustomerid($idcustomer)
+    {
+       $customer = Customer::find($idcustomer);
+       if($customer){
+           return response()->json(
+               [
+               'message'=>'Detail Customer',
+               'data'=>$customer,
+               ],200);
+       }else{
+           return response()->json(
+               [
+               'message'=>'Customer tidak ada',
+               ],200);
+       }
     }
 }
