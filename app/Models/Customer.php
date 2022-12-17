@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-     protected $table ='customer';
+    protected $table ='customer';
+    protected $primaryKey = 'idcustomer';
     //mapping ke kolom
     protected $fillable = ['nama_customer','no_tlp','gender','alamat'];
 

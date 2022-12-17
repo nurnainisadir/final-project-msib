@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
-     protected $table ='transaksi';
+    protected $table ='transaksi';
+    protected $primaryKey = 'idtransaksi';
     //mapping ke kolom
-    protected $fillable = ['customer_id','jenis_id','berat','tgl_awal','tgl_ambil','total_bayar','karyawan_id'];
+    protected $fillable = ['customer_id','jenis_id','berat','tgl_awal','tgl_ambil','total_bayar','status','karyawan_id','users_id'];
 
     public function customer()
     {
@@ -25,5 +26,10 @@ class Transaksi extends Model
     public function karyawan()
     {
     	return $this->belongsTo(Karyawan::class,'karyawan_id','idkaryawan');
+    }
+
+    public function users()
+    {
+    	return $this->belongsTo(User::class,'users_id','id');
     }
 }

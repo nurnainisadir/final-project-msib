@@ -10,6 +10,7 @@ class Jenis extends Model
     use HasFactory;
     //mapping ke tabel
     protected $table ='jenis';
+    protected $primaryKey = 'idjenis';
     //mapping ke kolom
     protected $fillable = ['jenis_laundry','harga'];
 
