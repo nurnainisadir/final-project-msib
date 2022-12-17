@@ -7,31 +7,29 @@
             <div class="col-12">
                 <div class="section-title">
                     <h3 class="m-0 font-weight-bold text-primary">Data User</h3><br>
-
+                    {{-- 
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                         <p>{{ $message }}</p>
                         </div>
                         @endif
-                        
                         <a href="{{ route('users.create') }}">
-                        <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah"></button></a>&nbsp;
-                    <br><br>
+                        <button type="button" class="btn btn-primary bi-plus btn-sm" title="Tambah"></button></a>&nbsp; <br><br> 
+                    --}}
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-bordered" id="dataTable">
                     <thead>
-                        <tr  align="center">
+                        <tr align="center">
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Isactive</th>
-                            <th scope="col">Tanggal Buat</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -43,9 +41,8 @@
                             <td>{{ $row->name }}</td>
                             <td>{{ $row->email }}</td>
                             <td>{{ $row->role }}</td>
-                            <td>{{ $row->isactive }}</td>
-                            <td>{{ $row->created_at }}</td>
-
+                            @php $aktif = ($row->isactive == 1) ? 'Aktif' : 'Tidak Aktif'; @endphp
+                            <td>{{ $aktif}}</td>
                             <td>
                             <form method="POST" id="formDelete">
                             @csrf
@@ -73,7 +70,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>  
+<script>
+$('#dataTable').DataTable();
+</script>
 <script type="text/javascript">
+
     $('body').on('click', '.btnDelete', function(e) {
     e.preventDefault();
     var action = $(this).data('action');

@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('content')
 @php
-$ar_role = ['admin','karyawan'];
+$ar_isactive = ['0','1'];
 @endphp
 <div class="container px-5 my-2">
     <div class="card-body">
@@ -37,51 +37,41 @@ $ar_role = ['admin','karyawan'];
         </div>
 
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Password</label>
+        <label class="col-sm-2 col-form-label">Role</label>
             <div class="col-sm-5">
-                <input type="text" name="password" class="form-control" value="{{ $row->password }}">
-                <div class="invalid-feedback"></div>
+                <select class="form-select form-control" name="role">
+                    <option selected>Pilih Role</option>
+                    @php 
+                    $sel = ($row->role == $row->role) ? 'selected' : ''; 
+                    @endphp
+                    <option value="{{ $row->role }}" {{ $sel }}>{{ $row->role }}</option>
+                    <option value="admin">Admin</option>
+                    <option value="karyawan">Karyawan</option>
+                </select>
             </div>
         </div>
-        
+      
         <div class="row mb-3">
-           <label class="col-sm-2 col-form-label">Role</label>
+           <label class="col-sm-2 col-form-label">Isactive</label>
             <div class="radio col-sm-10">
-                @foreach($ar_role as $role)
-                @php $cek = ($role == $row->role) ? 'checked' : ''; @endphp
+                @foreach($ar_isactive as $isactive)
+                @php $cek = ($isactive == $row->isactive) ? 'checked' : ''; @endphp
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" value="{{ $role }}" {{ $cek }}>
+                    <input class="form-check-input" type="radio" name="isactive" value="{{ $isactive }}" {{ $cek }}>
                     <label class="form-check-label" for="gridRadios1">
-                        {{ $role }}
+                        {{ $isactive }}
             </label>
                 </div>
                 @endforeach
             </div>
         </div>
-
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Isactive</label>
-            <div class="col-sm-5">
-                <input type="number" name="isactive" class="form-control" value="{{ $row->isactive }}">
-                <div class="invalid-feedback"></div>
-            </div>
-        </div>
         
-        <div class="row mb-3">
-            <label for="inputNumber" class="col-sm-2 col-form-label">Foto</label>
-            <div class="col-sm-5">
-                <input type="file" name="foto" class="form-control">
-                @if(!empty($row->foto)) <img src="{{ url('img')}}/{{$row->foto}}" width="10%" class="img-thumbnail"><br/>\
-                {{$row->foto}}
-                @endif
-            </div>
-        </div>
-        <br>
         <div class="d-grid">
             <button class="btn btn-primary" type="submit">Submit</button>
             <a class="btn btn-secondary" href=" {{ url('users') }}">Batal</a>
         </div>
     </form>
+    </div>
 </div>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 @endsection
