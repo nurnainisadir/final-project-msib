@@ -10,7 +10,7 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
-                <th>Jenis Laundry</th>
+                <th>Jenis Laundry | SI Laundry</th>
                 <th>Harga</th>
             </tr>
         </thead>
