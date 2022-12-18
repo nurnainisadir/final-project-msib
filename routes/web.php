@@ -7,6 +7,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,21 +49,31 @@ Route::middleware('auth')->group(function(){
     
     Route::resource('jenis',JenisController::class);
     Route::resource('customer',CustomerController::class);
-    Route::resource('karyawan',KaryawanController::class);
+    //Route::resource('karyawan',KaryawanController::class);
+    //Route::get('ajax/karyawan/{karyawan:idkaryawan}', [KaryawanController::class, 'showAjax']);
     Route::resource('transaksi',TransaksiController::class);
+    Route::get('ajax/transaksi/{transaksi:idtransaksi}', [TransaksiController::class, 'showAjax']);
     Route::resource('users',UserController::class);
     Route::get('transaksi-edit/{idtransaksi}', [TransaksiController::class,'edit']);
     Route::get('jenis-edit/{idjenis}', [JenisController::class,'edit']);
     Route::get('customer-edit/{idcustomer}', [CustomerController::class,'edit']);
-    Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
+    //Route::get('karyawan-edit/{idkaryawan}', [KaryawanController::class,'edit']);
     Route::get('users-edit/{id}', [UserController::class,'edit']);
     Route::get('customer-pdf', [CustomerController::class,'customerPDF']);
-    Route::get('karyawan-pdf', [KaryawanController::class,'karyawanPDF']);
+    //Route::get('karyawan-pdf', [KaryawanController::class,'karyawanPDF']);
     Route::get('jenis-pdf', [JenisController::class,'jenisPDF']);
     Route::get('transaksi-pdf', [TransaksiController::class,'transaksiPDF']);
+    Route::get('unduh-pdf/{idtransaksi}', [TransaksiController::class,'unduhPDF']);
     Route::get('transaksi-excel', [TransaksiController::class,'transaksiExcel']);
     Route::get('dashboard', [DashboardController::class,'index']);
     Route::get('after_register', [RegisterController::class,'index']);
+
+    Route::get('profil',[UserController::class,'profil'])->name('profil');
+    Route::get('edit-profil',[UserController::class,'editprofil'])->name('edit-profil');
+    Route::put('update-profil/{id}',[UserController::class,'updateprofil'])->name('update-profil');
+    
+    Route::get('ubah-password',[ProfilController::class,'ubahpassword'])->name('ubah-password');
+    Route::post('ubah-password',[ProfilController::class,'ubahpasswordproses'])->name('ubah-password-proses');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
