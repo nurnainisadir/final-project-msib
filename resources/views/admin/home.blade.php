@@ -83,6 +83,8 @@
                 </div>
               </div>
             </div>
+</div>
+</div>
 @else
 @include('admin.access_denied')
 @endif
