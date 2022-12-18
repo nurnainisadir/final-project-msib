@@ -7,10 +7,10 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 align-self-md-center">
                     @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
                     <center><br>
                     <div class="image-block">
                     @empty($row->foto)
