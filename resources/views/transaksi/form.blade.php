@@ -7,7 +7,7 @@
         <h3 class="m-0 font-weight-bold text-primary">Form Transaksi</h3><br>
              @if ($errors->any())
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> Terjadi Kesalahan saat input data<br><br>
+                <strong>Whoops!</strong> Terjadi kesalahan saat input data<br><br>
             </div>
             @endif
 
@@ -95,7 +95,7 @@
 
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Total Bayar</label>
-                <div class="col-sm-5">
+                <div class="col-sm-2">
                     <input type="number" name="total_bayar" value="{{ old('total_bayar') }}"
                     class="form-control form-control @error('total_bayar') is-invalid @enderror">
                         @error('total_bayar')
@@ -105,26 +105,27 @@
                     @enderror  
                 </div>
             </div>
-
+              
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Karyawan</label>
+                <label class="col-sm-2 col-form-label">Kasir</label>
                 <div class="col-sm-5">
-                    <select class="form-select form-control @error('karyawan_id') is-invalid @enderror" name="karyawan_id">
-                    <option selected>Pilih Karyawan</option>
-                    @foreach($ar_karyawan as $kar)
+                    <select class="form-select form-control @error('users_id') is-invalid @enderror" name="users_id">
+                    <option selected>Pilih Kasir</option>
+                    @foreach($ar_users as $kar)
                         @php
-                        $sel = (old('karyawan_id') == $kar->idkaryawan)? 'selected':'';
+                        $sel = (old('users_id') == $kar->id)? 'selected':'';
                         @endphp
-                        <option value="{{ $kar->idkaryawan }}" {{ $sel }}>{{ $kar->nama_karyawan }}</option>
+                        <option value="{{ $kar->id }}" {{ $sel }}>{{ $kar->name }}</option>
                     @endforeach
                     </select>
-                    @error('karyawan_id')
+                    @error('users_id')
                         <div class="invalid-feedback">
                         {{ $message }}
                         </div>
                     @enderror               
                 </div>
             </div>
+            
         <br>
         <div class="d-grid">
             <button class="btn btn-primary" type="submit">Submit</button>
