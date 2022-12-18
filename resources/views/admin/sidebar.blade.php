@@ -24,9 +24,11 @@
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{url('/customer')}}">Data Customer</a>
+           {{--  
             @if(auth()->user()->role==='admin')
             <a class="collapse-item" href="{{url('/karyawan')}}">Data Karyawan</a>
             @endif
+            --}}
             <a class="collapse-item" href="{{url('/jenis')}}">Jenis Laundry</a>
           </div>
         </div>
@@ -36,7 +38,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fas fa-fw fa-user"></i>
           <span>Manage User</span>
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
@@ -55,7 +57,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{url('/transaksi')}}">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Riwayat Transaksi</span>
+          <span>Transaksi</span>
         </a>
       </li>
     </ul>
