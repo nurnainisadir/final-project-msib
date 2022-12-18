@@ -61,9 +61,7 @@ $ar_gender = ['L','P'];
                     @enderror
                 </div>
             </div>
-
-
-
+            
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
             <div class="col-md-5">
@@ -73,7 +71,7 @@ $ar_gender = ['L','P'];
                     {{ $message }}
                     </div>
                     @enderror
-        </div>
+            </div>
         </div>
 
         <div class="d-grid">
@@ -81,6 +79,7 @@ $ar_gender = ['L','P'];
             <a class="btn btn-secondary" href=" {{ url('customer') }}">Batal</a>
         </div>
     </form>
+</div>
 </div>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 @endsection

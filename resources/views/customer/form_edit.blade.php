@@ -66,5 +66,6 @@ $ar_gender = ['L','P'];
         </div>
     </form>
 </div>
+</div>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 @endsection
