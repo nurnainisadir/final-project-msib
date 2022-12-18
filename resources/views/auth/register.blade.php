@@ -1,6 +1,4 @@
-@extends('landingpage.index')
 
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +28,7 @@
               <div class="col-lg-12">
                 <div class="login-form">
                     <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Create an Account</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Register</h1>
                     </div>
 
                     <form action="{{ route('register') }}" class="user" method="POST">
@@ -74,21 +72,11 @@
                     <div class="form-group">
                       <button class="btn btn-primary btn-block" type="submit">Register</button>
                     </div>
-                    <hr>
-
-                    <a href="index.html" class="btn btn-google btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a>   
-                    <hr>
                     
                   </form>
                   <div class="text-center">
-                    <a class="font-weight-bold small" href="{{ route('login') }}">Already have an account?</a>
+                  <p>Already have an account ? <a class="font-weight-bold" href="{{ route('login') }}">Login</a></p>
                   </div>
-                  <div class="text-center">
                   </div>
                 </div>
               </div>
@@ -106,4 +94,3 @@
 </body>
 
 </html>
-@endsection
